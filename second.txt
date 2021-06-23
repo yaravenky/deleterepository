@@ -1,1 +1,2 @@
 Hello i am second file
+Just changed for git test
