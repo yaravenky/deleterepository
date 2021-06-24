@@ -1,0 +1,73 @@
+
+/**** We will install Jenkins on Ec2 instamce on AWS.
+
+
+let us start installing Ec2 on this instance
+Step 1a> Launch an Ec2 instance (Amazon Linux) , 
+Login to the instance, install and setup java environment
+
+sudo yum install -y git java-1.8.0-openjdk-devel aws cli
+
+1b> 
+ sudo alternatives --config java
+
+ In above command we are checking if multiple java versions are 
+ installed on Ec2 instance then we will set java version to 
+ to the latest version.
+
+you can see that installed version of java is java-1.8.0 so we will 
+set it to current selection by hitting "enter" button on Ec2 instance.
+
+Step 2. Install Apache Maven
+
+sudo wget http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -O/etc/yum.repos.d/epel-apache-maven.repo
+
+sudo sed -i s/\$releasever/6/g /etc/yum.repos.d/epel-apache-maven.repo
+
+sudo yum install -y apache-maven
+
+mvn --version
+ 
+The above command will show Maven home and Java Home
+Maven home :/usr/share/apache-maven
+
+Java Home :/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.222.b10-0.amzn2.0.1.x86_64/jre
+
+Step 4. Install Jenkins
+sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo
+
+sudo rpm -import http://pkg.jenkins-ci.org/redhat-stable/jenkins-ci.org.key
+
+
+sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+
+
+sudo yum install jenkins
+
+sudo service jenkins start
+
+sudo chkconfig --add jenkins
+
+That’s it! 
+
+
+
+Now you can go to URL http://<instanceip>:8080 and see jenkins interface.
+ 	my Ec2 instace's Pulic ip is :18.219.124.211
+	Jenkins URL will be http://18.219.124.211:8080
+	Load this URL in browser
+
+     After installing jenkins. Go to jenkins >> Manage Jenkins >> Global Tool Conguiguration.
+     Here set the JAVA_HOME and MAVEN_HOME paths.
+     run command mvn --version on the instance where you have installed Jenkins to know 
+     the path of Java and Maven
+     Let us connect to EC2 instance from Putty and there we will run command mvn --version
+     to know the path of Java and Maven.
+
+     This is  JAVA_HOME /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.222.b10-0.amzn2.0.1.x86_64
+     This is MAVEN_HOME /usr/share/apache-maven
+     
+    
+   
+ 
+
